@@ -2,6 +2,7 @@ package ejercicio1;
 
 import java.util.ArrayList;
 import java.util.ListIterator;
+import java.util.TreeSet;
 
 public class mainEjercicio1_a {
 
@@ -21,13 +22,26 @@ public class mainEjercicio1_a {
 		arraysProfesores.add(profe4);
 		arraysProfesores.add(profe5);
 		
-		ListIterator<Profesor> it = arraysProfesores.listIterator();
+		TreeSet<Profesor> listaProfesores = new TreeSet<Profesor>();
+		listaProfesores.add(profe1);
+		listaProfesores.add(profe2);
+		listaProfesores.add(profe3);
+		listaProfesores.add(profe4);
+		listaProfesores.add(profe5);
+		
+		
+		for(Profesor profe : listaProfesores) {
+			System.out.println(profe.toString());
+		}
+		
+		/*
+		ListIterator<Profesor> it = listaProfesores.listIterator();
 		while(it.hasNext()) {
 			Profesor profe = it.next();
 			it.remove();
 			System.out.println(profe.toString());
 		}
-		
+		*/
 		if(profe1.equals(profe6)) {
 			System.out.println("Son iguales.");
 		} else {

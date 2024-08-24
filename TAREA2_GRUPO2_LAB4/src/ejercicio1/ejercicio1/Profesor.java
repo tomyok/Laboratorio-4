@@ -1,6 +1,6 @@
 package ejercicio1;
 
-public class Profesor extends Empleado {
+public class Profesor extends Empleado implements Comparable<Profesor>{
 	private String cargo;
 	private int antiguedadDocente;
 	
@@ -9,8 +9,8 @@ public class Profesor extends Empleado {
 		this.antiguedadDocente = 0;
 	}
 	
-	public Profesor(String cargo, int antiguedadDocente) {
-		super();
+	public Profesor(String Nombre, int edad, String cargo, int antiguedadDocente) {
+		super(Nombre, edad);
 		this.cargo = cargo;
 		this.antiguedadDocente = antiguedadDocente;
 	}
@@ -26,6 +26,14 @@ public class Profesor extends Empleado {
 	}
 	public void setAntiguedadDocente(int antiguedadDocente) {
 		this.antiguedadDocente = antiguedadDocente;
+	}
+
+	@Override
+	public int compareTo(Profesor o) {
+		if(o.getEdad()>this.getEdad()) {
+			return -1;
+		}
+		return 1;
 	}
 	
 	

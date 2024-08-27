@@ -19,4 +19,8 @@ public class ProductoCongelado extends Producto{
 		this.temperaturaRecomendada = temperaturaRecomendada;
 	}
 	
+	@Override
+	public String toString() {
+		return super.toString() + "Congelado" +", Temperatura recomendada: " + this.temperaturaRecomendada + ".";		
+	}
 }

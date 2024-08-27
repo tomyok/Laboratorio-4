@@ -19,4 +19,8 @@ public class ProductoRefrigerado extends Producto{
 		this.codigoOrganismo = codigoOrganismo;
 	}
 
+	@Override
+	public String toString() {
+		return super.toString() + "Refrigerado" + ", Codigo de organismo: " + this.codigoOrganismo + ".";
+	}
 }

@@ -27,7 +27,7 @@ public class Producto {
 	}
 	@Override
 	public String toString() {
-		return "Producto fechaCaducidad: " + fechaCaducidad + ", numeroDeLote: " + numeroDeLote;
+		return "Numero de lote: " + this.numeroDeLote + ", Fecha caducidad: " + this.fechaCaducidad + ", Producto";
 	}
 	
 }

@@ -1,6 +1,13 @@
 package ejercicio1;
 
-public class Persona {
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.TreeSet;
+
+import ejercicio1.DniInvalido;
+
+public class Persona implements Comparable<Persona>{
 
 	private String nombre;
 	private String apellido;
@@ -40,6 +47,21 @@ public class Persona {
 	public void setDni(String dni) {
 		this.dni = dni;
 	}
+	
+	public static boolean verificarDniInvalido (String dni) throws DniInvalido
+	{		
+		boolean valido = true;
+	    for(int i=0; i< dni.length() ; i++)
+	    {
+		    if (!Character.isDigit(dni.charAt(i))) {
+	            valido= false; 
+		    }
+	    }
+	    if(!valido) {
+		    throw new DniInvalido();
+	    }
+	    return true;		   
+	}
 
 	@Override
 	public int hashCode() {
@@ -70,4 +92,43 @@ public class Persona {
 		return "Persona Nombre:" + nombre + ", Apellido:" + apellido + ", DNI:" + dni;
 	}
 
+	@Override
+	public int compareTo(Persona otraPersona) {
+		return this.apellido.compareTo(otraPersona.apellido);
+	}
+
+	public static TreeSet<Persona> leerPersonas(Archivo archi){
+		TreeSet<Persona> personas= new TreeSet<Persona>();
+		
+		try {
+			FileReader entrada= new FileReader(archi.getRuta());
+			BufferedReader bufferedReader = new BufferedReader(entrada);
+			
+			String linea= bufferedReader.readLine();
+			while(linea != null) {
+				String[] datos= linea.split("-");
+				if(datos.length==3) {
+					try {
+						String nombre=datos[0].trim();
+						String apellido=datos[1].trim();
+						String dni=datos[2].trim();
+						
+						if(Persona.verificarDniInvalido(dni)) {
+							Persona persona = new Persona(nombre, apellido, dni);
+							personas.add(persona);
+							}
+							
+						}catch (DniInvalido e) {
+						e.getMessage();
+					}
+				}
+				linea = bufferedReader.readLine();
+			}
+		bufferedReader.close();
+		}catch (IOException e) {
+			e.printStackTrace();
+		}
+	
+		return personas;
+	}
 }

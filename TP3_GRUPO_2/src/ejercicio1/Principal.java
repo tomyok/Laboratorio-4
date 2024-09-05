@@ -8,24 +8,31 @@ import ejercicio1.Archivo;
 public class Principal {
 
 	public static void main(String[] args) {
-		Archivo archivo = new Archivo();
-		archivo.setRuta("Personas.txt");
+		Archivo archivoLeer = new Archivo();
+		archivoLeer.setRuta("Personas.txt");
 		
-		if(!archivo.existe())
+		TreeSet<Persona> personas = Persona.leerPersonas(archivoLeer);
+		
+		Archivo archivoEscribir = new Archivo();
+		archivoEscribir.setRuta("PersonasEscribir.txt");	
+		
+		if(archivoEscribir.existe())
 		{
-			System.out.println("No existe el archivo solicitado");
-		}else {
-			//LECTURA:
-			System.out.println("\n A CONTINUACIÓN LOS DATOS DEL ARCHIVO: ");
-			archivo.Leer();
+			System.out.println("Existe el archivo");
+		} else {
+			archivoEscribir.CrearArchivo();
 		}
-		
-		TreeSet<Persona> personas = Persona.leerPersonas(archivo);
+	
 	
 	Iterator<Persona> iterador = personas.iterator();
 	while(iterador.hasNext()) {
 		Persona per = (Persona) iterador.next();
-		System.out.println(per.toString());
+		archivoEscribir.Escribir(per.toString()+"\n");
 	}
+	
+	System.out.println("\n Lee archivo: ");
+	archivoEscribir.Leer();
+	
+	
 	}
 }

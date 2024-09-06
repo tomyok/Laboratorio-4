@@ -17,7 +17,7 @@ public class Principal {
 		
 		JButton boton = new JButton();
 		boton.setText("Aceptar");
-		boton.setBounds(10,15,140,50);
+		boton.setBounds(10,15,140,30);
 		
 		frame.setLayout(null);
 		frame.getContentPane().add(boton);

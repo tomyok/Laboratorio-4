@@ -14,8 +14,12 @@ import javax.swing.JTextField;
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.event.ListSelectionListener;
+import javax.swing.event.ListSelectionEvent;
 
 public class Ventana extends JFrame {
 
@@ -68,6 +72,16 @@ public class Ventana extends JFrame {
 		txtNombre.setColumns(10);
 		
 		list = new JList();
+		list.addListSelectionListener(new ListSelectionListener() {
+			public void valueChanged(ListSelectionEvent arg0) {
+			if(list.getSelectedIndex()!=-1) {
+				//Se selecciono un elemto del JList
+				JOptionPane.showMessageDialog(null, "Se elimino la categoria: " + ((Categorias)defaultListModel.getElementAt(list.getSelectedIndex())).getNombre());
+				defaultListModel.remove(list.getSelectedIndex());
+			}
+				
+			}
+		});
 		list.setBounds(44, 160, 401, 114);
 		
 		defaultListModel = new DefaultListModel<Categorias>();

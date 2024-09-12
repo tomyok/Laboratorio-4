@@ -1,12 +1,14 @@
 package Dominio;
 
+import java.util.ArrayList;
+
 public class Principal {
 
 	public static void main(String[] args) {
 		
 		UsuarioDAO usuarioDAO = new UsuarioDAO();
 		
-		Usuario us1 = new Usuario("Jorge","Ramirez");
+		/*Usuario us1 = new Usuario("Jorge","Ramirez");
 		
 		int filas = usuarioDAO.agregarUsuario(us1);
 		
@@ -15,7 +17,13 @@ public class Principal {
 		} else {
 			System.out.println("Usuario no agregado a la DB.");
 		}
+		*/
 		
+		ArrayList<Usuario> lista = usuarioDAO.obtenerListadoUsuarios();
+		
+		for(Usuario us : lista) {
+			System.out.println(us.toString());
+		}
 	}
 
 }

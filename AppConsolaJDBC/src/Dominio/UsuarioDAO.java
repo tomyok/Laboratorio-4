@@ -5,6 +5,7 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.sql.CallableStatement;
 
 public class UsuarioDAO {
 
@@ -76,6 +77,23 @@ public class UsuarioDAO {
 			e.printStackTrace();
 		}
 		return lista;
+	}
+	
+	public void agregarUsuarioSP(Usuario us) {
+		Connection cn = null;
+		
+		try {
+			cn = DriverManager.getConnection(host+dbName+"?useSSL=false",user,pass);
+			CallableStatement cst = cn.prepareCall("CALL crearUsuario(?,?)");
+			cst.setString(1, us.getNombre());
+			cst.setString(2, us.getApellido());
+			cst.execute();
+			System.out.println("Usuario creado con exito.");
+		}
+		catch (Exception e) {
+			System.out.println("Error al crear un usuario.");
+			e.printStackTrace();
+		}
 	}
 	
 }

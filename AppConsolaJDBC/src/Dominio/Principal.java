@@ -8,9 +8,9 @@ public class Principal {
 		
 		UsuarioDAO usuarioDAO = new UsuarioDAO();
 		
-		/*Usuario us1 = new Usuario("Jorge","Ramirez");
+		Usuario us1 = new Usuario("Jorgelina","Ramirez");
 		
-		int filas = usuarioDAO.agregarUsuario(us1);
+		/*int filas = usuarioDAO.agregarUsuario(us1);
 		
 		if(filas==1) {
 			System.out.println("Usuario agregado a la DB correctamente.");
@@ -24,6 +24,8 @@ public class Principal {
 		for(Usuario us : lista) {
 			System.out.println(us.toString());
 		}
+		
+		usuarioDAO.agregarUsuarioSP(us1);
 	}
 
 }

@@ -9,6 +9,8 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class Principal extends JFrame {
 
@@ -47,6 +49,12 @@ public class Principal extends JFrame {
 		contentPane.add(lblGrupoNro);
 		
 		JButton btnEjercicio = new JButton("Ejercicio 1");
+		btnEjercicio.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				Contactos contactos = new Contactos();
+				contactos.setVisible(true);
+			}
+		});
 		btnEjercicio.setBounds(145, 78, 115, 29);
 		contentPane.add(btnEjercicio);
 		

@@ -117,7 +117,7 @@ public class Contactos extends JFrame {
                     txtTelefono.setText("");
                     txtFechaNac.setText("");
                 } else {
-                    resultado="Los datos ingresados son: ";
+                    resultado="Los datos ingresados fueron: ";
                 }
             }
         });

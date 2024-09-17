@@ -59,6 +59,12 @@ public class Principal extends JFrame {
 		contentPane.add(btnEjercicio);
 		
 		JButton btnEjercicio_1 = new JButton("Ejercicio 2");
+		btnEjercicio_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				Promedio promedio = new Promedio();
+				promedio.setVisible(true);
+			}
+		});
 		btnEjercicio_1.setBounds(145, 123, 115, 29);
 		contentPane.add(btnEjercicio_1);
 		

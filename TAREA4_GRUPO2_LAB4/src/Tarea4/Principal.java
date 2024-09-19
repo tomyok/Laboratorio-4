@@ -48,28 +48,40 @@ public class Principal extends JFrame {
 		lblGrupoNro.setBounds(15, 33, 154, 29);
 		contentPane.add(lblGrupoNro);
 		
-		JButton btnEjercicio = new JButton("Ejercicio 1");
-		btnEjercicio.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				Contactos contactos = new Contactos();
-				contactos.setVisible(true);
-			}
-		});
-		btnEjercicio.setBounds(145, 78, 115, 29);
-		contentPane.add(btnEjercicio);
-		
-		JButton btnEjercicio_1 = new JButton("Ejercicio 2");
-		btnEjercicio_1.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				Promedio promedio = new Promedio();
-				promedio.setVisible(true);
-			}
-		});
-		btnEjercicio_1.setBounds(145, 123, 115, 29);
+		JButton btnEjercicio_1 = new JButton("Ejercicio 1");
+		btnEjercicio_1.addActionListener(new btnEjercicio_1());
+		btnEjercicio_1.setBounds(145, 78, 115, 29);
 		contentPane.add(btnEjercicio_1);
 		
-		JButton btnEjercicio_2 = new JButton("Ejercicio 3");
-		btnEjercicio_2.setBounds(145, 168, 115, 29);
+		JButton btnEjercicio_2 = new JButton("Ejercicio 2");
+		btnEjercicio_2.addActionListener(new btnEjercicio_2());
+		btnEjercicio_2.setBounds(145, 123, 115, 29);
 		contentPane.add(btnEjercicio_2);
+		
+		JButton btnEjercicio_3 = new JButton("Ejercicio 3");
+		btnEjercicio_3.addActionListener(new btnEjercicio_3());
+		btnEjercicio_3.setBounds(145, 168, 115, 29);
+		contentPane.add(btnEjercicio_3);
+	}
+	
+	class btnEjercicio_1 implements ActionListener{		
+		public void actionPerformed(ActionEvent e) {
+			Contactos contactos = new Contactos();
+			contactos.setVisible(true);		
+		}		
+	}
+	
+	class btnEjercicio_2 implements ActionListener{
+		public void actionPerformed(ActionEvent e) {
+			Promedio promedio = new Promedio();
+			promedio.setVisible(true);
+		}
+	}
+	
+	class btnEjercicio_3 implements ActionListener{
+		public void actionPerformed(ActionEvent e) {
+			SeleccionMultiple seleccMultiple = new SeleccionMultiple();
+			seleccMultiple.setVisible(true);
+		}
 	}
 }

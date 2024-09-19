@@ -241,6 +241,8 @@ public class Promedio extends JFrame {
                 txtNota1.setText("");
                 txtNota2.setText("");
                 txtNota3.setText("");
+                txtPromedio.setText("");
+                txtCondicion.setText("");
         	}
         });
         btnNuevo.setBounds(343, 86, 120, 23);

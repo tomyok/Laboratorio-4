@@ -21,15 +21,17 @@ import javax.swing.JCheckBox;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.LayoutStyle.ComponentPlacement;
+import javax.swing.JButton;
 
 public class SeleccionMultiple extends JFrame {
 
 	private JPanel contentPane;
+	private JTextField txtHoras;
 
 	
 	public SeleccionMultiple() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 583, 423);
+		setBounds(100, 100, 501, 343);
 		contentPane = new JPanel();
 		contentPane.setForeground(new Color(0, 0, 0));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -37,19 +39,19 @@ public class SeleccionMultiple extends JFrame {
 		contentPane.setLayout(null);
 		
 		JLabel lblElijeUnSistema = new JLabel("Elije un sistema operativo");
-		lblElijeUnSistema.setBounds(57, 72, 167, 16);
+		lblElijeUnSistema.setBounds(38, 38, 167, 16);
 		contentPane.add(lblElijeUnSistema);
 		
 		JRadioButton rdbtnWindows = new JRadioButton("Windows");
-		rdbtnWindows.setBounds(241, 68, 81, 25);
+		rdbtnWindows.setBounds(222, 34, 81, 25);
 		contentPane.add(rdbtnWindows);
 		
 		JRadioButton rdbtnMac = new JRadioButton("Mac");
-		rdbtnMac.setBounds(330, 68, 62, 25);
+		rdbtnMac.setBounds(311, 34, 62, 25);
 		contentPane.add(rdbtnMac);
 		
 		JRadioButton rdbtnLinux = new JRadioButton("Linux");
-		rdbtnLinux.setBounds(396, 68, 74, 25);
+		rdbtnLinux.setBounds(377, 34, 74, 25);
 		contentPane.add(rdbtnLinux);
 		
 		ButtonGroup grupo = new ButtonGroup();
@@ -58,12 +60,12 @@ public class SeleccionMultiple extends JFrame {
 		grupo.add(rdbtnLinux);
 		
 		JPanel panel = new JPanel();
-		panel.setBounds(39, 45, 441, 68);
+		panel.setBounds(20, 11, 441, 68);
 		panel.setBorder(BorderFactory.createLineBorder(Color.BLACK, 1));
 		contentPane.add(panel);
 		
 		JPanel panel_1 = new JPanel();
-		panel_1.setBounds(39, 135, 441, 133);
+		panel_1.setBounds(20, 90, 441, 133);
 		panel_1.setBorder(BorderFactory.createLineBorder(Color.BLACK, 1));
 		contentPane.add(panel_1);
 		
@@ -76,11 +78,11 @@ public class SeleccionMultiple extends JFrame {
 		JCheckBox chckbxDisenoGrafico = new JCheckBox("Dise\u00F1o Gr\u00E1fico");
 		GroupLayout gl_panel_1 = new GroupLayout(panel_1);
 		gl_panel_1.setHorizontalGroup(
-			gl_panel_1.createParallelGroup(Alignment.LEADING)
-				.addGroup(Alignment.TRAILING, gl_panel_1.createSequentialGroup()
-					.addGap(30)
+			gl_panel_1.createParallelGroup(Alignment.TRAILING)
+				.addGroup(gl_panel_1.createSequentialGroup()
+					.addContainerGap()
 					.addComponent(lblElijeUnaEspecialidad)
-					.addPreferredGap(ComponentPlacement.RELATED, 64, Short.MAX_VALUE)
+					.addPreferredGap(ComponentPlacement.RELATED, 84, Short.MAX_VALUE)
 					.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
 						.addComponent(chckbxDisenoGrafico)
 						.addComponent(chckbxProgramacion)
@@ -99,10 +101,24 @@ public class SeleccionMultiple extends JFrame {
 							.addComponent(chckbxAdministracin)))
 					.addPreferredGap(ComponentPlacement.UNRELATED)
 					.addComponent(chckbxDisenoGrafico)
-					.addContainerGap(31, Short.MAX_VALUE))
+					.addContainerGap(27, Short.MAX_VALUE))
 		);
 		panel_1.setLayout(gl_panel_1);
 		
+		JLabel lblHoras = new JLabel("Cantidad de horas en el computador:");
+		lblHoras.setBounds(140, 237, 243, 14);
+		contentPane.add(lblHoras);
+		
+		txtHoras = new JTextField();
+		txtHoras.setBounds(375, 234, 86, 20);
+		contentPane.add(txtHoras);
+		txtHoras.setColumns(10);
+		
+		JButton btnAceptar = new JButton("Aceptar");
+		btnAceptar.setBounds(372, 265, 89, 23);
+		contentPane.add(btnAceptar);
+		
+			
 		setTitle("Selección múltiple");
 	}
 }

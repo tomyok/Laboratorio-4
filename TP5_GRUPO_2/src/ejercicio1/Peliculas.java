@@ -6,6 +6,7 @@ public class Peliculas {
 	private static int idcont = 0;
 	private String nombre;
 	private String genero;
+	private Categoria categoria;
 	
 	public Peliculas() {
 		idcont++;
@@ -35,10 +36,19 @@ public class Peliculas {
 		this.genero = genero;
 	}
 
+	public Categoria getCategoria() {
+		return categoria;
+	}
+	
+	public void setCategoria(Categoria categoria) {
+		this.categoria = categoria;
+	}
+	
 	@Override
 	public String toString() {
 		return "Nombre: " + nombre + ", Genero: " + genero + ", ID: " + id + ".";
 	}
+
 	
 	
 	

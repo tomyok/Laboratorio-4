@@ -9,7 +9,7 @@ public class Categoria {
 	}
 
 	public Categoria(int id, String nombre) {
-		super();
+		super();//es necesario?
 		this.id = id;
 		this.nombre = nombre;
 	}
@@ -32,7 +32,5 @@ public class Categoria {
 	@Override
 	public String toString() {
 		return nombre;
-	}
-
-	
+	}	
 }

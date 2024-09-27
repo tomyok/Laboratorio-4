@@ -1,23 +1,22 @@
 package ejercicio1;
 
-public class Peliculas {
+public class Pelicula {
 
 	private final int id;
 	private static int idcont = 0;
 	private String nombre;
-	private String genero;
 	private Categoria categoria;
 	
-	public Peliculas() {
+	public Pelicula() {
 		idcont++;
 		this.id = idcont;
 	}
 	
-	public Peliculas(int id, String nombre, String genero) {
+	public Pelicula(int id, String nombre, Categoria categoria) {
 		idcont++;
 		this.id = idcont;
 		this.nombre = nombre;
-		this.genero = genero;
+		this.categoria = categoria;
 	}
 	
 	public int getId() {
@@ -28,12 +27,6 @@ public class Peliculas {
 	}
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
-	}
-	public String getGenero() {
-		return genero;
-	}
-	public void setGenero(String genero) {
-		this.genero = genero;
 	}
 
 	public Categoria getCategoria() {
@@ -46,7 +39,7 @@ public class Peliculas {
 	
 	@Override
 	public String toString() {
-		return "Nombre: " + nombre + ", Genero: " + genero + ", ID: " + id + ".";
+		return "Nombre: " + nombre + ", Genero: " + categoria.getNombre() + ", ID: " + id + ".";
 	}
 
 	

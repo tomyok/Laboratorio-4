@@ -4,6 +4,7 @@ import javax.swing.JPanel;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JComboBox;
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
@@ -14,8 +15,8 @@ import java.awt.event.ActionEvent;
 public class PanelAgregarPeliculas extends JPanel {
 	private JTextField txtNombrePelicula;
 	private JComboBox<Categoria> cBoxGenero;
-	private Pelicula aux;
 	private DefaultListModel<Pelicula> dlPeliculas;
+	private Pelicula prox;
 	
 
 	/**
@@ -23,15 +24,13 @@ public class PanelAgregarPeliculas extends JPanel {
 	 */
 	public PanelAgregarPeliculas() {
 		setLayout(null);
-		aux= new Pelicula();
 		JLabel lblId = new JLabel("ID:");
 		lblId.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		lblId.setBounds(111, 62, 33, 16);
 		add(lblId);
 		
-		JLabel lblIDPelicula = new JLabel("");
+		JLabel lblIDPelicula = new JLabel(String.valueOf(Pelicula.devuelveProximoId()));
 		lblIDPelicula.setBounds(205, 62, 56, 16);
-		lblIDPelicula.setText(Integer.toString(aux.getId()));
 		add(lblIDPelicula);
 		
 		JLabel lblNombre = new JLabel("Nombre:");
@@ -63,15 +62,16 @@ public class PanelAgregarPeliculas extends JPanel {
 			public void actionPerformed(ActionEvent arg0) {
 			if((!txtNombrePelicula.getText().isEmpty()) && (cBoxGenero.getSelectedItem().toString() != "Seleccione un genero")) {
 			
-				aux.setNombre(txtNombrePelicula.getText());
-				Categoria auxCat = new Categoria();
-				auxCat.setNombre(cBoxGenero.getSelectedItem().toString());
-				aux.setCategoria(auxCat);
-				
+				String nombre = txtNombrePelicula.getText();
+				Categoria categoria = (Categoria) cBoxGenero.getSelectedItem();
+				Pelicula aux = new Pelicula(nombre, categoria);
 				dlPeliculas.addElement(aux);
 				
 				txtNombrePelicula.setText("");
 				cBoxGenero.setSelectedIndex(0);
+				lblIDPelicula.setText(String.valueOf(Pelicula.devuelveProximoId()));
+			}else {
+				JOptionPane.showMessageDialog(null, "No ingreso un titulo o falto seleccionar la categoria, verifiquelo");
 			}
 		
 			}

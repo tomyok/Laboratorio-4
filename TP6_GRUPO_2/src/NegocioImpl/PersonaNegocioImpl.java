@@ -41,4 +41,14 @@ public class PersonaNegocioImpl implements PersonaNegocio{
 		return pdao.readAll();
 	}
 
+	@Override
+	public boolean edit(Persona persona_modificar) {
+		boolean estado=false;
+		if(persona_modificar.getNombre().trim().length()>0 && persona_modificar.getApellido().trim().length()>0)
+		{
+			estado=pdao.edit(persona_modificar);
+		}
+		return estado;
+	}
+
 }

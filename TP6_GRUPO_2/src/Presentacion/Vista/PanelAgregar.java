@@ -19,10 +19,17 @@ public class PanelAgregar extends JPanel {
 	private JTextField txtNombre;
 	private JTextField txtApellido;
 	private JTextField txtDni;
-
+	private JButton btnAceptar;
 	/**
 	 * Create the panel.
 	 */
+	
+	public JButton getBtnAceptar() {
+		return btnAceptar;
+	}
+	public void setBtnAceptar(JButton btnAceptar) {
+		this.btnAceptar = btnAceptar;
+	}
 	public PanelAgregar() {
 		setLayout(null);
 		
@@ -80,39 +87,26 @@ public class PanelAgregar extends JPanel {
 		add(txtDni);
 		txtDni.setColumns(10);
 		
-		JButton btnAceptar = new JButton("Aceptar");
-		btnAceptar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				if(!txtNombre.getText().isEmpty() && !txtApellido.getText().isEmpty() && !txtDni.getText().isEmpty()) {
-					String dni = txtDni.getText();
-					Persona persona = new Persona();
-					PersonaNegocioImpl pNeg = new PersonaNegocioImpl();
-					persona = pNeg.readDni(dni);
-					if (persona.getDni() == null) {
-						persona.setDni(dni);
-						persona.setApellido(txtNombre.getText());
-						persona.setNombre(txtApellido.getText());
-						
-						boolean estado = pNeg.insert(persona);
-						
-						if(estado) {
-							JOptionPane.showMessageDialog(null, "Persona agregada correctamente");
-							txtNombre.setText("");
-							txtApellido.setText("");
-							txtDni.setText("");
-						} else {
-							JOptionPane.showMessageDialog(null, "Error al guardar");
-						}
-					} else {
-						JOptionPane.showMessageDialog(null, "Ya existe una persona con ese DNI. Revise los datos ingresados");						
-					}
-				}
-				else {
-					JOptionPane.showMessageDialog(null, "Es necesario completar todos los campos");
-				}
-			}
-		});
+		btnAceptar = new JButton("Aceptar");
 		btnAceptar.setBounds(37, 181, 89, 23);
 		add(btnAceptar);
+	}
+	public JTextField getTxtNombre() {
+		return txtNombre;
+	}
+	public void setTxtNombre(JTextField txtNombre) {
+		this.txtNombre = txtNombre;
+	}
+	public JTextField getTxtApellido() {
+		return txtApellido;
+	}
+	public void setTxtApellido(JTextField txtApellido) {
+		this.txtApellido = txtApellido;
+	}
+	public JTextField getTxtDni() {
+		return txtDni;
+	}
+	public void setTxtDni(JTextField txtDni) {
+		this.txtDni = txtDni;
 	}
 }

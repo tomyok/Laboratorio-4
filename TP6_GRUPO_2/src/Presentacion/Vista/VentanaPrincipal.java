@@ -38,15 +38,6 @@ public class VentanaPrincipal extends JFrame {
 		menuBar.add(mnPersona);
 		
 		mntAgregar = new JMenuItem("Agregar");
-		mntAgregar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				contentPane.removeAll();
-				PanelAgregar panelAgregar = new PanelAgregar();
-				contentPane.add(panelAgregar);
-				contentPane.repaint();
-				contentPane.revalidate();				
-			}
-		});
 		mnPersona.add(mntAgregar);
 		
 		mntModificar = new JMenuItem("Modificar");

@@ -51,4 +51,9 @@ public class PersonaNegocioImpl implements PersonaNegocio{
 		return estado;
 	}
 
+	@Override
+	public Persona readDni(String dni) {
+		return pdao.readDni(dni);
+	}
+
 }

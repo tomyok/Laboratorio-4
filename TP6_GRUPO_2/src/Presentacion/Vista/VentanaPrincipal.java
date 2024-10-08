@@ -1,6 +1,7 @@
 package Presentacion.Vista;
 
 import java.awt.BorderLayout;
+import java.awt.Container;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -12,6 +13,8 @@ import org.omg.CORBA.PUBLIC_MEMBER;
 import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class VentanaPrincipal extends JFrame {
 
@@ -21,7 +24,7 @@ public class VentanaPrincipal extends JFrame {
 	private JMenuItem mntModificar;
 	private JMenuItem mntEliminar;
 	private JMenuItem mntListar;
-
+	private JPanel contentPane;
 
 	public VentanaPrincipal() {
 		setTitle("Programa");
@@ -35,9 +38,27 @@ public class VentanaPrincipal extends JFrame {
 		menuBar.add(mnPersona);
 		
 		mntAgregar = new JMenuItem("Agregar");
+		mntAgregar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				contentPane.removeAll();
+				PanelAgregar panelAgregar = new PanelAgregar();
+				contentPane.add(panelAgregar);
+				contentPane.repaint();
+				contentPane.revalidate();				
+			}
+		});
 		mnPersona.add(mntAgregar);
 		
 		mntModificar = new JMenuItem("Modificar");
+		mntModificar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				contentPane.removeAll();
+				PanelModificar panelModificar = new PanelModificar();
+				contentPane.add(panelModificar);
+				contentPane.repaint();
+				contentPane.revalidate();				
+			}
+		});
 		mnPersona.add(mntModificar);
 		
 		mntEliminar = new JMenuItem("Eliminar");
@@ -46,6 +67,10 @@ public class VentanaPrincipal extends JFrame {
 		mntListar = new JMenuItem("Listar");
 		mnPersona.add(mntListar);
 		
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		contentPane.setLayout(new BorderLayout(0, 0));
+		setContentPane(contentPane);
 		
 	}
 
@@ -99,5 +124,5 @@ public class VentanaPrincipal extends JFrame {
 		this.mntListar = mntListar;
 	}
 	
-
+	
 }

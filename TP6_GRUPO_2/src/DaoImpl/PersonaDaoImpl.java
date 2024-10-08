@@ -1,9 +1,11 @@
 package DaoImpl;
 
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,13 +13,41 @@ import Dao.PersonaDao;
 import Entidad.Persona;
 
 
+
 public class PersonaDaoImpl implements PersonaDao
 {
+	private static final String readDni = "SELECT * FROM personas WHERE dni = ?";
 	private static final String insert = "INSERT INTO personas(dni, nombre, apellido) VALUES(?, ?, ?)";
 	private static final String delete = "DELETE FROM personas WHERE dni = ?";
 	private static final String readall = "SELECT * FROM personas";
 	private static final String edit = "UPDATE personas SET nombre = ?, apellido = ? WHERE dni = ?";
 		
+	@Override
+	public Persona readDni (String dni)
+	{
+		PreparedStatement statement;
+		ResultSet resultSet;
+		Persona persona = new Persona();
+		Conexion conexion = Conexion.getConexion();
+		try 
+		{
+			statement = conexion.getSQLConexion().prepareStatement(readDni);
+			statement.setString(1, dni);
+			resultSet = statement.executeQuery();
+			
+			resultSet.next();
+			persona.setDni(resultSet.getString(1));
+			persona.setNombre(resultSet.getString(2));
+			persona.setApellido(resultSet.getString(3));
+		} 
+		catch (SQLException e) 
+		{
+			e.printStackTrace();
+		}
+		return persona;
+	}
+	
+	@Override
 	public boolean insert(Persona persona)
 	{
 		PreparedStatement statement;
@@ -48,6 +78,7 @@ public class PersonaDaoImpl implements PersonaDao
 		return isInsertExitoso;
 	}
 	
+	@Override
 	public boolean delete(Persona persona_a_eliminar)
 	{
 		PreparedStatement statement;
@@ -70,6 +101,7 @@ public class PersonaDaoImpl implements PersonaDao
 		return isdeleteExitoso;
 	}
 	
+	@Override
 	public List<Persona> readAll()
 	{
 		PreparedStatement statement;
@@ -90,15 +122,7 @@ public class PersonaDaoImpl implements PersonaDao
 			e.printStackTrace();
 		}
 		return personas;
-	}
-	
-	private Persona getPersona(ResultSet resultSet) throws SQLException
-	{
-		String dni = resultSet.getString("Dni");
-		String nombre = resultSet.getString("Nombre");
-		String apellido = resultSet.getString("Apellido");
-		return new Persona(dni, nombre, apellido);
-	}
+	}		
 
 	@Override
 	public boolean edit(Persona persona_modificar) {
@@ -126,5 +150,12 @@ public class PersonaDaoImpl implements PersonaDao
 	    }  
 	    return isEditExitoso;
 	}
-
+	
+	private Persona getPersona(ResultSet resultSet) throws SQLException
+	{
+		String dni = resultSet.getString("Dni");
+		String nombre = resultSet.getString("Nombre");
+		String apellido = resultSet.getString("Apellido");
+		return new Persona(dni, nombre, apellido);
+	}
 }

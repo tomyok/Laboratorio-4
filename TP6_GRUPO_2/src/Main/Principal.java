@@ -12,5 +12,4 @@ public class Principal {
 		VentanaPrincipal vista = new VentanaPrincipal();
 		vista.setVisible(true);
 	}
-
 }

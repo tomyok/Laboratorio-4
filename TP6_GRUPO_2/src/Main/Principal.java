@@ -14,5 +14,6 @@ public class Principal {
 		PersonaNegocio pNeg = new PersonaNegocioImpl();
 		Controlador controlador = new Controlador(vista, pNeg);
 		controlador.inicializar();
+		
 	}
 }

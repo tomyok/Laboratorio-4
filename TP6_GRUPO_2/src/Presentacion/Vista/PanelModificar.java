@@ -21,6 +21,7 @@ public class PanelModificar extends JPanel {
 	private JTextField txtNombre;
 	private JTextField txtApellido;
 	private JTextField txtDni;
+	private JList listaPersonas;
 
 	/**
 	 * Create the panel.
@@ -86,13 +87,46 @@ public class PanelModificar extends JPanel {
 		btnModificar.setBounds(431, 236, 89, 23);
 		add(btnModificar);
 		
-		JLabel lblSeleccione = new JLabel("Seleccione la persona que desea eliminar");
+		JLabel lblSeleccione = new JLabel("Seleccione la persona que desea modificar");
 		lblSeleccione.setFont(new Font("Tahoma", Font.BOLD, 12));
 		lblSeleccione.setBounds(10, 11, 510, 14);
 		add(lblSeleccione);
 		
-		JList list = new JList();
-		list.setBounds(10, 36, 508, 176);
-		add(list);
+		listaPersonas = new JList();
+		listaPersonas.setBounds(10, 36, 508, 176);
+		add(listaPersonas);
 	}
+
+	public JList getListaPersonas() {
+		return listaPersonas;
+	}
+
+	public void setListaPersonas(JList listaPersonas) {
+		this.listaPersonas = listaPersonas;
+	}
+
+	public JTextField getTxtNombre() {
+		return txtNombre;
+	}
+
+	public void setTxtNombre(JTextField txtNombre) {
+		this.txtNombre = txtNombre;
+	}
+
+	public JTextField getTxtApellido() {
+		return txtApellido;
+	}
+
+	public void setTxtApellido(JTextField txtApellido) {
+		this.txtApellido = txtApellido;
+	}
+
+	public JTextField getTxtDni() {
+		return txtDni;
+	}
+
+	public void setTxtDni(JTextField txtDni) {
+		this.txtDni = txtDni;
+	}
+	
 }

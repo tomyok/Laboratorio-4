@@ -21,6 +21,7 @@ public class PanelModificar extends JPanel {
 	private JTextField txtNombre;
 	private JTextField txtApellido;
 	private JTextField txtDni;
+	private JButton btnModificar;
 	private JList listaPersonas;
 
 	/**
@@ -83,7 +84,7 @@ public class PanelModificar extends JPanel {
 		add(txtDni);
 		txtDni.setColumns(10);
 		
-		JButton btnModificar = new JButton("Modificar");
+		btnModificar = new JButton("Modificar");
 		btnModificar.setBounds(431, 236, 89, 23);
 		add(btnModificar);
 		
@@ -93,7 +94,7 @@ public class PanelModificar extends JPanel {
 		add(lblSeleccione);
 		
 		listaPersonas = new JList();
-		listaPersonas.setBounds(10, 36, 508, 176);
+		listaPersonas.setBounds(10, 36, 425, 176);
 		add(listaPersonas);
 	}
 
@@ -127,6 +128,14 @@ public class PanelModificar extends JPanel {
 
 	public void setTxtDni(JTextField txtDni) {
 		this.txtDni = txtDni;
+	}
+
+	public JButton getBtnModificar() {
+		return btnModificar;
+	}
+
+	public void setBtnModificar(JButton btnModificar) {
+		this.btnModificar = btnModificar;
 	}
 	
 }

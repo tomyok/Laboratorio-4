@@ -5,7 +5,10 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.util.List;
+
+import javax.swing.JList;
 import javax.swing.JOptionPane;
+import javax.swing.event.ListSelectionEvent;
 import javax.swing.table.DefaultTableModel;
 
 import Entidad.Persona;
@@ -74,8 +77,74 @@ public class Controlador implements ActionListener{
 		//EVENTOS PANEL ELIMINAR
 		this.pnlEliminar.getBtnEliminar().addActionListener(a->EventoClickBoton_EliminarPersona_PanelEliminarPersonas(a));
 		
+		//EVENTOS PANEL MODIFICAR
+		this.pnlModificar.getBtnModificar().addActionListener(a->EventoClickBoton_ModificarPersona_PanelModificar(a));
+		this.pnlModificar.getListaPersonas().addListSelectionListener(a->EventoClick_ElegirPersona_PanelModificar(a));
+		this.pnlModificar.getTxtNombre().addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent arg0) {
+				char caracter = arg0.getKeyChar();
+				if(!Character.isLetter(caracter) && caracter != KeyEvent.VK_BACK_SPACE && caracter != KeyEvent.VK_DELETE && caracter != ' ') {
+					arg0.consume();
+				}
+			}
+		});
+		this.pnlModificar.getTxtApellido().addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent e) {
+				char caracter = e.getKeyChar();
+				if(!Character.isLetter(caracter) && caracter != KeyEvent.VK_BACK_SPACE && caracter != KeyEvent.VK_DELETE && caracter != ' ') {
+					e.consume();
+				}
+			}
+		});
+		this.pnlModificar.getTxtDni().addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent e) {
+				char caracter = e.getKeyChar();
+				if(!Character.isDigit(caracter) && caracter != KeyEvent.VK_BACK_SPACE && caracter != KeyEvent.VK_DELETE) {
+					e.consume();
+				}				
+			}
+		});
 	}
 	
+
+	private void EventoClick_ElegirPersona_PanelModificar(ListSelectionEvent a) {
+		Persona seleccion = (Persona) pnlModificar.getListaPersonas().getSelectedValue();
+		
+		if (seleccion != null) {
+	        pnlModificar.getTxtNombre().setText(seleccion.getNombre());
+	        pnlModificar.getTxtApellido().setText(seleccion.getApellido());
+	        pnlModificar.getTxtDni().setText(seleccion.getDni());
+	    } else {
+	        pnlModificar.getTxtNombre().setText("");
+	        pnlModificar.getTxtApellido().setText("");
+	        pnlModificar.getTxtDni().setText("");
+	    }
+	}
+
+
+	private void EventoClickBoton_ModificarPersona_PanelModificar(ActionEvent a) {
+		Persona seleccion = (Persona) pnlModificar.getListaPersonas().getSelectedValue();
+		seleccion.setNombre(pnlModificar.getTxtNombre().getText());
+		seleccion.setApellido(pnlModificar.getTxtApellido().getText());
+		if(pNeg.edit(seleccion)) {
+			JOptionPane.showMessageDialog(null, "Persona modificada correctamente");
+			pnlModificar.getTxtNombre().setText("");
+			pnlModificar.getTxtApellido().setText("");
+			pnlModificar.getTxtDni().setText("");
+			
+			ventanaPrincipal.getContentPane().removeAll();
+			ventanaPrincipal.getContentPane().add(pnlModificar);
+			ventanaPrincipal.getContentPane().repaint();
+			ventanaPrincipal.getContentPane().revalidate();
+			
+		} else {
+			JOptionPane.showMessageDialog(null, "Error al modificar Persona");
+		}
+	}
+
 
 	private void EventoClickMenu_AbrirPanel_EliminarPersona(ActionEvent a) {
 		
@@ -90,11 +159,20 @@ public class Controlador implements ActionListener{
 
 
 	private void EventoClickMenu_AbrirPanel_ModificarPersona(ActionEvent a) {
+		List<Persona> personas = pNeg.readAll();
+		pnlModificar.getListaPersonas().setListData(personas.toArray());
+		
+		JList<Persona> listaPersonas = pnlModificar.getListaPersonas();
+
+		if (listaPersonas.getModel().getSize() > 0) {
+		    listaPersonas.setSelectedIndex(0);
+		}
 		
 		ventanaPrincipal.getContentPane().removeAll();
 		ventanaPrincipal.getContentPane().add(pnlModificar);
 		ventanaPrincipal.getContentPane().repaint();
 		ventanaPrincipal.getContentPane().revalidate();
+		
 	}
 
 

@@ -2,7 +2,9 @@ package daoImpl;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
@@ -140,6 +142,40 @@ public class SeguroDaoImpl implements SeguroDao{
 	    }
 	    
 	    return lista;
+	}
+
+	@Override
+	public int getLastId() {
+		int lastId = 0;  // Si no hay seguros, el primer ID será 1
+	    String sql = "SELECT MAX(idSeguro) FROM seguros";
+	    Connection connection = null;
+
+	    try {
+	        // Cargar el driver de MySQL
+	        Class.forName("com.mysql.jdbc.Driver");
+	        
+	        // Establecer la conexión a la base de datos
+	        connection = DriverManager.getConnection(host + dbName, user, pass);
+	        PreparedStatement stmt = connection.prepareStatement(sql);
+	        ResultSet rs = stmt.executeQuery();
+	        
+	        // Si hay resultados, obtener el último ID
+	        if (rs.next()) {
+	            lastId = rs.getInt(1);  // Obtener el último ID
+	        }
+	    } catch (SQLException | ClassNotFoundException e) {
+	        e.printStackTrace();
+	    } finally {
+	        try {
+	            if (connection != null) {
+	                connection.close();  // Cerrar la conexión
+	            }
+	        } catch (SQLException e) {
+	            e.printStackTrace();
+	        }
+	    }
+	    
+	    return lastId;
 	}
 
 }

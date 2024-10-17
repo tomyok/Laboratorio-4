@@ -11,4 +11,5 @@ public interface SeguroDao {
 	public boolean agregarSeguro(Seguro seguro);
 	public ArrayList<Seguro> obtenerSeguros();
 	public ArrayList<Seguro> obtenerSegurosPorTipo(int tipoSeguroId);
+	public int getLastId();
 }

@@ -1,11 +1,18 @@
 package servlet;
 
 import java.io.IOException;
+import java.util.ArrayList;
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import entidades.Seguro;
+import entidades.TipoSeguro;
+import negocioImpl.SeguroNegocioImpl;
 
 /**
  * Servlet implementation class servletSeguros
@@ -22,14 +29,46 @@ public class servletSeguros extends HttpServlet {
 
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		if (request.getParameter("btnFiltrar") != null) {
+	        int tipoSeguroId = Integer.parseInt(request.getParameter("tipoSeguro")); // ID del tipo de seguro seleccionado
+
+	        SeguroNegocioImpl sNeg = new SeguroNegocioImpl();
+	        ArrayList<Seguro> listaFiltrada = (ArrayList<Seguro>) sNeg.filtrarPorTipoSeguro(tipoSeguroId); // Llamada al método de filtrado en la capa de negocio
+
+	        request.setAttribute("listaS", listaFiltrada);
+	        RequestDispatcher rd = request.getRequestDispatcher("/ListarSeguros.jsp");
+	        rd.forward(request, response);
+	    }
 	}
 
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+		if(request.getParameter("btnAceptar")!=null) {
+			String error = validarFormulario(request);
+			
+			if (error != null) {
+				request.setAttribute("error", error);
+				RequestDispatcher rd = request.getRequestDispatcher("/FormularioSeguro.jsp");
+				rd.forward(request, response);
+				return;
+			}
+			
+			Seguro s = new Seguro();
+			s.setDescripcion(request.getParameter("txtDescripcion"));
+			TipoSeguro tipoSeguro = new TipoSeguro();
+			tipoSeguro.setIdTipo(Integer.parseInt(request.getParameter("tipoSeguro")));
+			tipoSeguro.setDescripcion(request.getParameter("tipoDescripcion"));
+		    s.setTipoSeguro(tipoSeguro);
+			s.setCostoContratacion(Float.parseFloat(request.getParameter("txtCostoContratacion")));
+			s.setCostoAsegurado(Float.parseFloat(request.getParameter("txtCostoMaxAsegurado")));
+			
+			SeguroNegocioImpl sNeg = new SeguroNegocioImpl();
+			boolean estado = sNeg.insert(s);
+			
+			request.setAttribute("cantFilas", estado);
+			RequestDispatcher rd = request.getRequestDispatcher("/Inicio.jsp");
+			rd.forward(request, response);
+		}
 	}
 	
 	private String validarFormulario(HttpServletRequest request) {

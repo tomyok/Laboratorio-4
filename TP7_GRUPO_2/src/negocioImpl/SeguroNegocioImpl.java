@@ -10,6 +10,7 @@ import negocio.SeguroNegocio;
 
 public class SeguroNegocioImpl implements SeguroNegocio{
 	SeguroDaoImpl sdao= new SeguroDaoImpl();
+	
 		
 public SeguroNegocioImpl() {
 		
@@ -31,7 +32,7 @@ public SeguroNegocioImpl() {
 	}
 
 	@Override
-	public List<Seguro> filtrarPorTipoSeguro(int tipoSeguroId) {
+	public ArrayList<Seguro> filtrarPorTipoSeguro(int tipoSeguroId) {
 		return sdao.obtenerSegurosPorTipo(tipoSeguroId);
 	}
 

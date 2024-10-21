@@ -39,6 +39,18 @@ public class servletSeguros extends HttpServlet {
 	        RequestDispatcher rd = request.getRequestDispatcher("/ListarSeguros.jsp");
 	        rd.forward(request, response);
 	    }
+		if(request.getParameter("Param")!=null) {
+			//SeguroDao sdao = new SeguroDao();
+			SeguroNegocioImpl sNeg = new SeguroNegocioImpl();
+			ArrayList<Seguro> listaSeguros = sNeg.readAll();
+			//ArrayList<Seguro> listaSeguros = sdao.obtenerSeguros();
+			
+			request.setAttribute("listaS", listaSeguros);
+			
+			RequestDispatcher rd = request.getRequestDispatcher("/ListarSeguros.jsp");
+			rd.forward(request, response);
+		}
+		
 	}
 
 	
@@ -48,7 +60,7 @@ public class servletSeguros extends HttpServlet {
 			
 			if (error != null) {
 				request.setAttribute("error", error);
-				RequestDispatcher rd = request.getRequestDispatcher("/FormularioSeguro.jsp");
+				RequestDispatcher rd = request.getRequestDispatcher("/AgregarSeguros.jsp");
 				rd.forward(request, response);
 				return;
 			}

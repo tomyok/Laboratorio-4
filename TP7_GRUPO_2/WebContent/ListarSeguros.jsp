@@ -6,11 +6,11 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Insert title here</title>
+<title>Lista de Seguros</title>
 </head>
 <body>
 <a href="Inicio.jsp">Inicio</a>
-	<a href="AgregarSeguro.jsp">Agregar Seguro</a>
+	<a href="AgregarSeguros.jsp">Agregar Seguro</a>
 	<a href="servletSeguros?Param=1">Listar Seguros</a>
 	<h1><b>Tipo de seguros de la base de datos</b></h1>
 	
